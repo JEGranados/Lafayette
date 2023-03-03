@@ -4,7 +4,7 @@ from datetime import datetime
 # Declare variables
 arduino_port = "/dev/ttyUSB0"
 baud = "9600"
-usb="/media/usb/csv"
+usb="/media/alecasti/ESD-USB"
 
 # Get current directory
 dir = os.path.dirname(os.path.realpath(__file__))
@@ -61,10 +61,20 @@ def getData():
 def checkUSB():
     if os.path.exists(usb):
         print("USB connected")
-        return usb
+        return True
     else:
         print("USB not connected")
-        return dir
+        return False
+
+def copy():
+   if checkUSB():
+        print("Copying files...")
+        os.system("cp " + dir + "/*.csv " + usb)
+        os.system("cp " + dir + "/*.json " + usb)
+        print("Files copied")
+        os.system("rm " + dir + "/*.csv")
+        os.system("rm " + dir + "/*.json")
+
 
 # Main loop
 while True:
@@ -82,7 +92,9 @@ while True:
     except:
         print("Data collection complete!") 
         arduino.close()
+        copy()
    
+
         
 
 
