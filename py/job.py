@@ -33,9 +33,10 @@ def saveCSV():
 def saveJson():  
     
     jsonstr = {
-        "timestamp": sensor_data[-1][0],
+        "time": sensor_data[-1][0],
         "sensor": sensor_data[-1][1],
-        "valor": int(sensor_data[-1][2])
+        "val": int((sensor_data[-1][2])),
+        "on": not bool(sensor_data[-1][3])
     }
     with open(json_name, 'a', encoding='UTF8') as f:
         json.dump(jsonstr,f)
@@ -49,9 +50,10 @@ def getData():
         dataString = dataPuerto.decode('utf-8')
         data=dataString[0:][:-2]
         readings = data.split(",")
-        timestamp = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+        timestamp = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         readings.insert(0, timestamp)
         sensor_data.append(readings)
+        print("Saving data...")
         saveCSV()
         saveJson()
     except Exception as e:
