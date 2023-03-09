@@ -83,8 +83,8 @@ while True:
     arduino = connect()
     sensor_data.clear()
     filedataname = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-    csv_name= dir + "/data" + filedataname + ".csv"
-    json_name= dir + "/data" + filedataname + ".json"
+    csv_name= dir + "/data " + filedataname + ".csv"
+    json_name= dir + "/data " + filedataname + ".json"
 
     # collect the samples
     try:
