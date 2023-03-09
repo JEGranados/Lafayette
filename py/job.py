@@ -50,7 +50,7 @@ def getData():
         dataString = dataPuerto.decode('utf-8')
         data=dataString[0:][:-2]
         readings = data.split(",")
-        timestamp = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
+        timestamp = datetime.now().strftime("%Y-%m-%d, %H:%M:%S")
         readings.insert(0, timestamp)
         sensor_data.append(readings)
         print("Saving data...")
